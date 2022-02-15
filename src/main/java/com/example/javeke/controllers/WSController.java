@@ -16,6 +16,6 @@ public class WSController {
     @GetMapping
     public String getDate(){
         ZonedDateTime zone = ZonedDateTime.now(ZoneId.of("UTC"));
-        return zone.format(DateTimeFormatter.ofPattern("eee MMM d HH:mm:ss z yyyy"));
+        return Date.from(zone.toInstant()).toString();
     }
 }
