@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @RestController
@@ -14,6 +14,11 @@ import java.util.Date;
 public class WSController {
     @GetMapping
     public String getDate(){
-        return new Date().toString();
+        Date now = new Date();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("eee MMM d HH:mm:ss ZZ yyyy");
+
+        ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(now.toInstant(), ZoneId.systemDefault());
+
+        return zonedDateTime.format(formatter);
     }
 }
