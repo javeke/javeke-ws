@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @RestController
@@ -15,7 +14,6 @@ import java.util.Date;
 public class WSController {
     @GetMapping
     public String getDate(){
-        ZonedDateTime zone = ZonedDateTime.now(ZoneId.of("UTC"));
-        return Date.from(zone.toInstant()).toString();
+        return new Date().toString();
     }
 }
