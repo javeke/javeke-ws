@@ -1,4 +1,4 @@
-package com.example.javeke.controllers;
+package com.example.javeke.controllers.date;
 
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +13,7 @@ import java.util.Date;
 
 @RestController
 @RequestMapping("date")
-public class WSController {
+public class DateController {
     @GetMapping
     public String getDate( @RequestParam(name = "minutesOffset", required = false) Integer minutesOffset){
         Date now = new Date(System.currentTimeMillis() + (1000L * 60 * (minutesOffset == null ? 0 : minutesOffset)));
