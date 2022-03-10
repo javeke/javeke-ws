@@ -12,9 +12,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @RestController
-@RequestMapping("date")
 public class WSController {
-    @GetMapping
+
+    @GetMapping("/")
+    public String welcome(){
+        return "Welcome";
+    }
+
+    @GetMapping("/date")
     public String getDate( @RequestParam(name = "minutesOffset", required = false) Integer minutesOffset){
         Date now = new Date(System.currentTimeMillis() + (1000L * 60 * (minutesOffset == null ? 0 : minutesOffset)));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("eee MMM d HH:mm:ss ZZ yyyy");
