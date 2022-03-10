@@ -1,6 +1,5 @@
-package com.example.javeke.controllers;
+package com.example.javeke.controllers.date;
 
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,14 +11,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @RestController
-public class WSController {
-
-    @GetMapping("/")
-    public String welcome(){
-        return "Welcome";
-    }
-
-    @GetMapping("/date")
+@RequestMapping("date")
+public class DateController {
+    @GetMapping
     public String getDate( @RequestParam(name = "minutesOffset", required = false) Integer minutesOffset){
         Date now = new Date(System.currentTimeMillis() + (1000L * 60 * (minutesOffset == null ? 0 : minutesOffset)));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("eee MMM d HH:mm:ss ZZ yyyy");
