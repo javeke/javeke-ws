@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @RestController
-@RequestMapping("date")
+@RequestMapping("/api/date")
 public class DateController {
     @GetMapping
     public String getDate( @RequestParam(name = "minutesOffset", required = false) Integer minutesOffset){
