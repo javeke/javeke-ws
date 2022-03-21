@@ -1,17 +1,31 @@
-package com.example.javeke.services.portfolio.models.request;
+package com.example.javeke.ws.portfolio.models.dto;
 
-public class PortfolioVisitorRequest {
+import com.example.javeke.ws.portfolio.models.dao.Visitor;
+
+public class VisitorDto {
 
     private String city;
     private String state;
     private String country;
     private String ipAddress;
+    private int numVisits;
 
-    public PortfolioVisitorRequest(String city, String state, String country, String ipAddress) {
+    public VisitorDto(){ }
+
+    public VisitorDto(String city, String state, String country, String ipAddress, int numVisits) {
         this.city = city;
         this.state = state;
         this.country = country;
         this.ipAddress = ipAddress;
+        this.numVisits = numVisits;
+    }
+
+    public VisitorDto(Visitor visitor) {
+        this.city = visitor.getCity();
+        this.state = visitor.getState();
+        this.country = visitor.getCountry();
+        this.ipAddress = visitor.getIpAddress();
+        this.numVisits = visitor.getNumVisits();
     }
 
     public String getCity() {
@@ -46,13 +60,19 @@ public class PortfolioVisitorRequest {
         this.ipAddress = ipAddress;
     }
 
+    public int getNumVisits() {
+        return numVisits;
+    }
+
+    public void setNumVisits(int numVisits) {
+        this.numVisits = numVisits;
+    }
+
     @Override
     public String toString() {
-        return "PortfolioVisitorRequest{" +
-                "city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", country='" + country + '\'' +
-                ", ipAddress='" + ipAddress + '\'' +
+        return "VisitorDto{" +
+                "ipAddress='" + ipAddress + '\'' +
+                ", numVisits=" + numVisits +
                 '}';
     }
 }

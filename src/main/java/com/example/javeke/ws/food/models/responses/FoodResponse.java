@@ -1,4 +1,4 @@
-package com.example.javeke.controllers.food.model;
+package com.example.javeke.ws.food.models.responses;
 
 public class FoodResponse {
     private String name;

@@ -1,6 +1,6 @@
-package com.example.javeke.controllers.food;
+package com.example.javeke.ws.food.controllers.food;
 
-import com.example.javeke.controllers.food.model.FoodResponse;
+import com.example.javeke.ws.food.models.responses.FoodResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

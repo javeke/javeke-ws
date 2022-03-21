@@ -1,4 +1,4 @@
-package com.example.javeke.controllers.date;
+package com.example.javeke.ws.date.controllers.date;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
