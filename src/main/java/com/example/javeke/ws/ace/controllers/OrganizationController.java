@@ -110,7 +110,6 @@ public class OrganizationController {
 
         return new ResponseEntity<>(organizationDtos, HttpStatus.OK);
     }
-
     @GetMapping("/{organizationId}/devices")
     public ResponseEntity<List<DeviceDto>> getDevices(@PathVariable("organizationId") String organizationId){
         List<DeviceDto> devices = organizationService.getDevices(organizationId);
