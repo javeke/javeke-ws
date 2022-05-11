@@ -1,6 +1,5 @@
 package com.example.javeke.ws.portfolio.models.dao;
 
-import com.mongodb.lang.NonNull;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;

@@ -1,0 +1,73 @@
+package com.example.javeke.ws.ace.services;
+
+import com.example.javeke.ws.ace.models.dao.Organization;
+import com.example.javeke.ws.ace.models.dto.DeviceDto;
+import com.example.javeke.ws.ace.repositories.IOrganizationRepository;
+import com.example.javeke.ws.ace.util.ActionResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.UUID;
+
+@Service
+public class OrganizationService {
+
+    private final IOrganizationRepository organizationRepository;
+
+    @Autowired
+    public OrganizationService(IOrganizationRepository organizationRepository) {
+        this.organizationRepository = organizationRepository;
+    }
+
+    public List<Organization> getOrganizations() {
+        return organizationRepository.findAll();
+    }
+
+    public Organization getOrganizationByName(String name){
+        return organizationRepository.findByName(name);
+    }
+
+    public Organization getOrganizationByOrganizationId(String organizationId){
+        return organizationRepository.findByOrganizationId(organizationId);
+    }
+
+    public Organization addOrganization(Organization organization){
+
+        String randomId = UUID.randomUUID().toString();
+
+        Organization found = organizationRepository.findByOrganizationId(randomId);
+
+        while (found != null){
+            randomId = UUID.randomUUID().toString();
+            found = organizationRepository.findByOrganizationId(randomId);
+        }
+        organization.setOrganizationId(randomId);
+
+        return organizationRepository.save(organization);
+    }
+
+    public List<DeviceDto> getDevices(String organizationId){
+        return organizationRepository.findByOrganizationId(organizationId).getDevices();
+    }
+
+    public ActionResponse<List<DeviceDto>> addDevice(String organizationId, DeviceDto device){
+        Organization organization = organizationRepository.findByOrganizationId(organizationId);
+
+        device.setId(UUID.randomUUID().toString());
+
+        boolean wasAdded = organization.getDevices().add(device);
+        if (wasAdded) organizationRepository.save(organization);
+        return new ActionResponse<>(wasAdded, organization.getDevices());
+    }
+
+    public ActionResponse<List<DeviceDto>> removeDevice(String organizationId, String deviceId){
+        Organization organization = organizationRepository.findByOrganizationId(organizationId);
+
+        boolean wasDeleted = organization.getDevices().removeIf((DeviceDto device)-> device.getId().equals(deviceId));
+
+        if(wasDeleted) organizationRepository.save(organization);
+
+        return new ActionResponse<>(wasDeleted, organization.getDevices());
+    }
+}
