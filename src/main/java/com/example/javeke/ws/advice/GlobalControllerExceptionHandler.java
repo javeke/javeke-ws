@@ -10,10 +10,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class GlobalControllerExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<Object> handleGlobalException(Exception ex){
-<<<<<<< HEAD
         logger.error(ex.getMessage());
-=======
->>>>>>> d0ad902 (implement websocket API and REST API for the organization CRUD operations)
         return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
