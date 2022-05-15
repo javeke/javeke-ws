@@ -93,7 +93,6 @@ public class OrganizationController {
         return new ResponseEntity<>(organizationResponse, HttpStatus.OK);
     }
 
-
     @DeleteMapping("/{organizationId}")
     public ResponseEntity<List<OrganizationDto>> deleteOrganization( @PathVariable("organizationId") String organizationId ) throws FailedActionException{
         ActionResponse<List<Organization>> actionResponse = organizationService.removeOrganization(organizationId);
@@ -110,6 +109,7 @@ public class OrganizationController {
 
         return new ResponseEntity<>(organizationDtos, HttpStatus.OK);
     }
+
     @GetMapping("/{organizationId}/devices")
     public ResponseEntity<List<DeviceDto>> getDevices(@PathVariable("organizationId") String organizationId){
         List<DeviceDto> devices = organizationService.getDevices(organizationId);
