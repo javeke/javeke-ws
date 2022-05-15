@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -73,6 +73,23 @@ public class OrganizationController {
         BeanUtils.copyProperties(organization, organizationResponse);
 
         return new ResponseEntity<>(organizationResponse, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{organizationId}")
+    public ResponseEntity<List<OrganizationDto>> deleteOrganization( @PathVariable("organizationId") String organizationId ) throws FailedActionException{
+        ActionResponse<List<Organization>> actionResponse = organizationService.removeOrganization(organizationId);
+
+        logger.info("Attempting to remove organization with id {}", organizationId);
+
+        if (!actionResponse.isSuccessful()){
+            logger.error("Could not remove organization with id {}", organizationId);
+            throw new FailedActionException("Organization Not Removed");
+        }
+        logger.info("Successfully removed organization with id {}", organizationId);
+
+        List<OrganizationDto> organizationDtos = actionResponse.getData().stream().map(OrganizationDto::new).collect(Collectors.toList());
+
+        return new ResponseEntity<>(organizationDtos, HttpStatus.OK);
     }
 
     @GetMapping("/{organizationId}/devices")

@@ -24,10 +24,6 @@ public class OrganizationService {
         return organizationRepository.findAll();
     }
 
-    public Organization getOrganizationByName(String name){
-        return organizationRepository.findByName(name);
-    }
-
     public Organization getOrganizationByOrganizationId(String organizationId){
         return organizationRepository.findByOrganizationId(organizationId);
     }
@@ -45,6 +41,13 @@ public class OrganizationService {
         organization.setOrganizationId(randomId);
 
         return organizationRepository.save(organization);
+    }
+
+    public ActionResponse<List<Organization>> removeOrganization(String organizationId) {
+        int numOfDeleted = organizationRepository.deleteByOrganizationId(organizationId);
+        boolean wasDeleted = numOfDeleted > 0;
+        List<Organization> organizations =  organizationRepository.findAll();
+        return new ActionResponse<>(wasDeleted, organizations);
     }
 
     public List<DeviceDto> getDevices(String organizationId){
