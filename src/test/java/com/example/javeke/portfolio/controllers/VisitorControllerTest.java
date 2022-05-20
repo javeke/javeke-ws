@@ -1,5 +1,6 @@
 package com.example.javeke.portfolio.controllers;
 
+import com.example.javeke.ws.ace.repositories.IOrganizationRepository;
 import com.example.javeke.ws.portfolio.controllers.visitor.VisitorController;
 import com.example.javeke.ws.portfolio.models.dao.Visitor;
 import com.example.javeke.ws.portfolio.repositories.visitor.VisitorRepository;
@@ -36,6 +37,9 @@ public class VisitorControllerTest {
 
     @MockBean
     private VisitorRepository visitorRepository;
+
+    @MockBean
+    private IOrganizationRepository organizationRepository;
 
     @Test
     public void givenNoVisitors_whenGetVisitors_returnEmptyJsonArray() throws Exception {
