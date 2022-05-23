@@ -50,6 +50,21 @@ public class OrganizationService {
         return new ActionResponse<>(wasDeleted, organizations);
     }
 
+    public ActionResponse<Organization> updateOrganization(String organizationId, Organization updatedOrganization){
+        Organization found = organizationRepository.findByOrganizationId(organizationId);
+
+        if(updatedOrganization.getDescription() != null){
+            found.setDescription(updatedOrganization.getDescription());
+        }
+
+        if(updatedOrganization.getName() != null){
+            found.setName(updatedOrganization.getName());
+        }
+
+        organizationRepository.save(found);
+        return new ActionResponse<>(true, found);
+    }
+
     public List<DeviceDto> getDevices(String organizationId){
         return organizationRepository.findByOrganizationId(organizationId).getDevices();
     }
