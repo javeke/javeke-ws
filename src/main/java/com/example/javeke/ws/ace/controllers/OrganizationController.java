@@ -66,14 +66,33 @@ public class OrganizationController {
 
     @GetMapping("/{organizationId}")
     public ResponseEntity<OrganizationDto> getOrganization(@PathVariable("organizationId") String organizationId){
-
+        logger.info("Fetching the data for organization with id {}", organizationId);
         Organization organization = organizationService.getOrganizationByOrganizationId(organizationId);
 
         OrganizationDto organizationResponse = new OrganizationDto();
         BeanUtils.copyProperties(organization, organizationResponse);
-
+        logger.info("Successfully fetched data for organization with id {}", organizationId);
         return new ResponseEntity<>(organizationResponse, HttpStatus.OK);
     }
+
+    @PutMapping("/{organizationId}")
+    public ResponseEntity<OrganizationDto> updateOrganization(@RequestBody OrganizationDto organizationDto, @PathVariable("organizationId") String organizationId) throws FailedActionException{
+        logger.info("Attempting to update the data for organization with id {}", organizationId);
+        Organization organizationRequest = new Organization();
+
+        BeanUtils.copyProperties(organizationDto, organizationRequest);
+        ActionResponse<Organization> actionResponse = organizationService.updateOrganization(organizationId, organizationRequest);
+
+        if(!actionResponse.isSuccessful()){
+            logger.info("Failed to update the data for organization with id {}", organizationId);
+            throw new FailedActionException("Organization Not Updated");
+        }
+        OrganizationDto organizationResponse = new OrganizationDto();
+        BeanUtils.copyProperties(actionResponse.getData(), organizationResponse);
+        logger.info("Successfully updated the data for organization with id {}", organizationId);
+        return new ResponseEntity<>(organizationResponse, HttpStatus.OK);
+    }
+
 
     @DeleteMapping("/{organizationId}")
     public ResponseEntity<List<OrganizationDto>> deleteOrganization( @PathVariable("organizationId") String organizationId ) throws FailedActionException{

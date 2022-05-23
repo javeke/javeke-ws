@@ -1,0 +1,4 @@
+application-local.properties
+.dockerignore
+README.md
+.git/
