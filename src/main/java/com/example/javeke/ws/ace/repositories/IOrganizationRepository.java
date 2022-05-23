@@ -8,5 +8,4 @@ import org.springframework.stereotype.Repository;
 public interface IOrganizationRepository extends MongoRepository<Organization, String> {
     Organization findByOrganizationId(String organizationId);
     int deleteByOrganizationId(String organizationId);
-
 }
