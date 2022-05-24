@@ -15,8 +15,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: sudo chmod +x mvnw
-      - name: Install Maven dependencies
-        run: sudo ./mvnw clean install
+      - name: Clears build cache
+        run: sudo ./mvnw clean
       - name: Generate JAR file
         run: sudo ./mvnw -Dspring.mongodb.embedded.version={{ secrets.MONGODB_VERSION }} package
       - name: Build docker image
