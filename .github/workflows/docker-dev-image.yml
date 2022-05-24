@@ -1,10 +1,9 @@
-name: Docker Image Build and Push
+name: Docker Dev Image Build and Push
 
 on:
   push:
     branches:
-      - master
-
+      - dev
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,8 +16,8 @@ jobs:
       - name: Generate JAR file
         run: sudo ./mvnw -Dspring.mongodb.embedded.version=${{ secrets.MONGODB_VERSION }} package
       - name: Build docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/javeke-ws:$(cat VERSION) .
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/javeke-ws-dev:$(cat VERSION) .
       - name: Login to Docker Hub
         run: docker login -u '${{ secrets.DOCKER_USERNAME }}' -p '${{ secrets.DOCKER_TOKEN }}'
       - name: Push image to docker hub
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/javeke-ws:$(cat VERSION)
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/javeke-ws-dev:$(cat VERSION)
