@@ -22,6 +22,7 @@ public class OrganizationDto {
         this.organizationId = organizationId;
         this.name = name;
         this.description = description;
+        this.devices = new ArrayList<>();
     }
 
     public OrganizationDto(String organizationId, String name, String description, ArrayList<DeviceDto> devices) {

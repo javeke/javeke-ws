@@ -7,6 +7,7 @@ import com.example.javeke.ws.ace.util.ActionResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -73,6 +74,11 @@ public class OrganizationService {
         Organization organization = organizationRepository.findByOrganizationId(organizationId);
 
         device.setId(UUID.randomUUID().toString());
+
+        if(organization.getDevices() == null){
+            ArrayList<DeviceDto> devices = new ArrayList<>();
+            organization.setDevices(devices);
+        }
 
         boolean wasAdded = organization.getDevices().add(device);
         if (wasAdded) organizationRepository.save(organization);
