@@ -26,10 +26,7 @@ public class Organization {
         this.organizationId = organizationId;
         this.name = name;
         this.description = description;
-<<<<<<< HEAD
         this.devices = new ArrayList<>();
-=======
->>>>>>> d0ad902 (implement websocket API and REST API for the organization CRUD operations)
     }
 
     public String getId() {
