@@ -88,10 +88,21 @@ public class OrganizationService {
     public ActionResponse<List<DeviceDto>> removeDevice(String organizationId, String deviceId){
         Organization organization = organizationRepository.findByOrganizationId(organizationId);
 
+        ActionResponse<List<DeviceDto>> response = new ActionResponse<>();
+
+        if(organization.getDevices() == null){
+            response.setSuccessful(false);
+            response.setData(null);
+            return response;
+        }
+
         boolean wasDeleted = organization.getDevices().removeIf((DeviceDto device)-> device.getId().equals(deviceId));
 
         if(wasDeleted) organizationRepository.save(organization);
 
-        return new ActionResponse<>(wasDeleted, organization.getDevices());
+        response.setSuccessful(wasDeleted);
+        response.setData(organization.getDevices());
+        return response;
+
     }
 }
