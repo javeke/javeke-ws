@@ -1,8 +1,13 @@
 package com.example.javeke.ws.ace.models.dto;
 
+import java.util.ArrayList;
+
 public class DeviceDto {
     private String id;
     private String name;
+    private boolean enabled;
+    private String healthStatus;
+    private ArrayList<DeviceData> dataPoints;
 
     public DeviceDto(String id, String name) {
         this.id = id;
@@ -23,5 +28,29 @@ public class DeviceDto {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getHealthStatus() {
+        return healthStatus;
+    }
+
+    public void setHealthStatus(String healthStatus) {
+        this.healthStatus = healthStatus;
+    }
+
+    public ArrayList<DeviceData> getDataPoints() {
+        return dataPoints;
+    }
+
+    public void setDataPoints(ArrayList<DeviceData> dataPoints) {
+        this.dataPoints = dataPoints;
     }
 }
