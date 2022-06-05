@@ -1,6 +1,5 @@
 package com.example.javeke.ws.ace.models.dto;
 
-<<<<<<< HEAD
 import java.time.ZonedDateTime;
 
 public class DeviceData {
@@ -31,7 +30,5 @@ public class DeviceData {
     public void setCreatedAt(ZonedDateTime createdAt) {
         this.createdAt = createdAt;
     }
-=======
-public class DeviceData {
->>>>>>> 95e259b (added support for non realtime data points)
+
 }
