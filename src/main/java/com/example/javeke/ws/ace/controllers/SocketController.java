@@ -22,9 +22,7 @@ public class SocketController {
     @SendTo("/device/data/{deviceId}")
     public SocketDataMessage handleDataRecord(@DestinationVariable("deviceId") String deviceId, @RequestBody SocketDataMessage message){
         logger.info("Device Id: {} -- Message Received: {}", deviceId, message.getMessage());
-        logger.info("Device Id: {} -- Data Received: {}",deviceId, message.getData());
-
-        Random randomGenerator = new Random(System.currentTimeMillis());
+        logger.info("Device Id: {} -- Data Received: {} - {}",deviceId, message.getData().getParamName(), message.getData().getParamValue());
 
         DeviceData deviceData =  new DeviceData();
         deviceData.setParamName("Temperature");
