@@ -1,6 +1,7 @@
 package com.example.javeke.ws.ace.services;
 
 import com.example.javeke.ws.ace.models.dao.Organization;
+import com.example.javeke.ws.ace.models.dto.DeviceData;
 import com.example.javeke.ws.ace.models.dto.DeviceDto;
 import com.example.javeke.ws.ace.repositories.IOrganizationRepository;
 import com.example.javeke.ws.ace.util.ActionResponse;
@@ -103,6 +104,9 @@ public class OrganizationService {
         response.setSuccessful(wasDeleted);
         response.setData(organization.getDevices());
         return response;
+    }
 
+    public ActionResponse<DeviceDto> updateData(String organizationId, String deviceId, DeviceData data){
+        return null;
     }
 }
