@@ -98,14 +98,6 @@ public class OrganizationService {
             return response;
         }
 
-        ActionResponse<List<DeviceDto>> response = new ActionResponse<>();
-
-        if(organization.getDevices() == null){
-            response.setSuccessful(false);
-            response.setData(null);
-            return response;
-        }
-
         boolean wasDeleted = organization.getDevices().removeIf((DeviceDto device)-> device.getId().equals(deviceId));
 
         if(wasDeleted) organizationRepository.save(organization);
@@ -113,7 +105,6 @@ public class OrganizationService {
         response.setSuccessful(wasDeleted);
         response.setData(organization.getDevices());
         return response;
-<<<<<<< HEAD
     }
 
     public ActionResponse<DeviceDto> toggleDeviceState(String organizationId, String deviceId, boolean state){
@@ -176,8 +167,5 @@ public class OrganizationService {
         response.setSuccessful(true);
         response.setData(device);
         return response;
-=======
-
->>>>>>> 67d2e9e (added null checking for deleting devices)
     }
 }
