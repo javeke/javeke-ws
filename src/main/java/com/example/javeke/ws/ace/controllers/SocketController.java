@@ -2,6 +2,7 @@ package com.example.javeke.ws.ace.controllers;
 
 import com.example.javeke.ws.ace.models.SocketControlMessage;
 import com.example.javeke.ws.ace.models.SocketDataMessage;
+import com.example.javeke.ws.ace.models.dto.DeviceData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
@@ -25,9 +26,12 @@ public class SocketController {
 
         Random randomGenerator = new Random(System.currentTimeMillis());
 
+        DeviceData deviceData =  new DeviceData();
+        deviceData.setParamName("Temperature");
         String data = String.format("New Temperature Reading from %s is %d", deviceId, randomGenerator.nextInt(128));
+        deviceData.setParamValue(data);
 
-        return new SocketDataMessage(data, "message received");
+        return new SocketDataMessage(deviceData, "message received");
     }
 
     @MessageMapping("/control/{deviceId}")

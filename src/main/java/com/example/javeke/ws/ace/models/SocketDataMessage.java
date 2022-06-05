@@ -1,19 +1,21 @@
 package com.example.javeke.ws.ace.models;
 
+import com.example.javeke.ws.ace.models.dto.DeviceData;
+
 public class SocketDataMessage {
-    private String data;
+    private DeviceData data;
     private String message;
 
-    public SocketDataMessage(String data, String message) {
+    public SocketDataMessage(DeviceData data, String message) {
         this.data = data;
         this.message = message;
     }
 
-    public String getData() {
+    public DeviceData getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(DeviceData data) {
         this.data = data;
     }
 
