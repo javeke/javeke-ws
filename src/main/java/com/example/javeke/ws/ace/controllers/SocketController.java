@@ -40,6 +40,9 @@ public class SocketController {
         logger.info("Device Id: {} -- Message Received: {}", deviceId, message.getMessage());
         logger.info("Device Id: {} -- Control Request Received: {}",deviceId, message.getControl());
 
+//        start doing things with the control
+
+
         String control = String.format("Turn off LED 1 on device %s", deviceId);
 
         return new SocketControlMessage(control, "control received");
