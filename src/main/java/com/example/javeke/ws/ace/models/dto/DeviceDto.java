@@ -8,6 +8,7 @@ public class DeviceDto {
     private boolean enabled;
     private String healthStatus;
     private ArrayList<DeviceData> dataPoints;
+    private String type;
 
     public DeviceDto(String id, String name) {
         this.id = id;
@@ -28,6 +29,14 @@ public class DeviceDto {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public boolean isEnabled() {
