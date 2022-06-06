@@ -20,7 +20,7 @@ public class SocketController {
 
     private static final Logger logger = LoggerFactory.getLogger(SocketController.class);
 
-    private OrganizationService organizationService;
+    private final OrganizationService organizationService;
 
     @Autowired
     public SocketController(OrganizationService organizationService){
@@ -31,7 +31,7 @@ public class SocketController {
     @SendTo("/deviceData/organizations/{organizationId}/devices/{deviceId}")
     public SocketDataMessage handleDataRecord(@DestinationVariable("organizationId") String organizationId, @DestinationVariable("deviceId") String deviceId, @RequestBody SocketDataMessage message){
         logger.info("Device Id: {} -- Message Received: {}", deviceId, message.getMessage());
-        logger.info("Device Id: {} -- Data Received: {} - {}",deviceId, message.getData().getParamName(), message.getData().getParamValue());
+        logger.info("Device Id: {} -- Data Received: {} - {}", deviceId, message.getData().getParamName(), message.getData().getParamValue());
         logger.info("Device Id: {} -- Time Received: {}", deviceId, message.getData().getCreatedAt());
 
 
