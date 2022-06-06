@@ -8,9 +8,7 @@ import com.example.javeke.ws.ace.util.ActionResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class OrganizationService {
@@ -71,6 +69,10 @@ public class OrganizationService {
         return organizationRepository.findByOrganizationId(organizationId).getDevices();
     }
 
+    public DeviceDto getDeviceById(String organizationId, String deviceId){
+        return organizationRepository.findByOrganizationId(organizationId).getDevices().stream().filter(deviceDto -> deviceDto.getId().equals(deviceId)).findFirst().orElse(null);
+    }
+
     public ActionResponse<List<DeviceDto>> addDevice(String organizationId, DeviceDto device){
         Organization organization = organizationRepository.findByOrganizationId(organizationId);
 
@@ -107,6 +109,45 @@ public class OrganizationService {
     }
 
     public ActionResponse<DeviceDto> updateData(String organizationId, String deviceId, DeviceData data){
-        return null;
+        Organization organization = organizationRepository.findByOrganizationId(organizationId);
+
+        ActionResponse<DeviceDto> response  = new ActionResponse<>();
+
+        if(organization == null){
+            response.setData(null);
+            response.setSuccessful(false);
+            return response;
+        }
+
+        Optional<DeviceDto> deviceDtoOptional = organization.getDevices().stream().filter(deviceDto -> deviceDto.getId().equals(deviceId)).findFirst();
+
+        if(!deviceDtoOptional.isPresent()){
+            response.setData(null);
+            response.setSuccessful(false);
+            return response;
+        }
+
+        DeviceDto device = deviceDtoOptional.get();
+
+        if(device.getDataPoints().size() == 0){
+            ArrayList<DeviceData> newList = new ArrayList<>();
+            newList.add(data);
+            device.setDataPoints(newList);
+        }
+        else {
+            device.getDataPoints().add(data);
+        }
+
+        for(DeviceDto organizationDevice : organization.getDevices()){
+            if(organizationDevice.getId().equals(device.getId())){
+                organizationDevice.setDataPoints(device.getDataPoints());
+                break;
+            }
+        }
+
+        organizationRepository.save(organization);
+        response.setSuccessful(true);
+        response.setData(device);
+        return response;
     }
 }
