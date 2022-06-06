@@ -129,7 +129,7 @@ public class OrganizationService {
 
         DeviceDto device = deviceDtoOptional.get();
 
-        if(device.getDataPoints().size() == 0){
+        if(device.getDataPoints() == null || (device.getDataPoints().size() == 0)){
             ArrayList<DeviceData> newList = new ArrayList<>();
             newList.add(data);
             device.setDataPoints(newList);
