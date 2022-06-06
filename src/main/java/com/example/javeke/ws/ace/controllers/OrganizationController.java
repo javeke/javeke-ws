@@ -121,6 +121,16 @@ public class OrganizationController {
         return new ResponseEntity<>(devices, HttpStatus.OK);
     }
 
+    @GetMapping("/{organizationId}/devices/{deviceId}")
+    public ResponseEntity<DeviceDto> getDeviceById(@PathVariable("organizationId") String organizationId, @PathVariable("deviceId") String deviceId){
+        DeviceDto device = organizationService.getDeviceById(organizationId, deviceId);
+
+        if(device == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(device, HttpStatus.OK);
+    }
+
     @PostMapping("/{organizationId}/devices")
     public ResponseEntity<List<DeviceDto>> addDevice(@PathVariable("organizationId") String organizationId, @RequestBody DeviceDto device) throws FailedActionException {
 
