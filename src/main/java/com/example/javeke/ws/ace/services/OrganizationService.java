@@ -148,7 +148,11 @@ public class OrganizationService {
 
         DeviceDto device = deviceDtoOptional.get();
 
+<<<<<<< HEAD
         if(device.getDataPoints() == null || (device.getDataPoints().size() == 0)){
+=======
+        if(device.getDataPoints().size() == 0){
+>>>>>>> d0e1387 (added zonetime converter, device, device data and updated web socket api)
             ArrayList<DeviceData> newList = new ArrayList<>();
             newList.add(data);
             device.setDataPoints(newList);
