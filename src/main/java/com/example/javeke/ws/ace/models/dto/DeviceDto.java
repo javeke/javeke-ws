@@ -62,4 +62,16 @@ public class DeviceDto {
     public void setDataPoints(ArrayList<DeviceData> dataPoints) {
         this.dataPoints = dataPoints;
     }
+
+    @Override
+    public String toString() {
+        return "DeviceDto{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", enabled=" + enabled +
+                ", healthStatus='" + healthStatus + '\'' +
+                ", dataPoints=" + dataPoints +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }
