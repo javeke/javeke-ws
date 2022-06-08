@@ -26,6 +26,7 @@ public class Organization {
         this.organizationId = organizationId;
         this.name = name;
         this.description = description;
+        this.devices = new ArrayList<>();
     }
 
     public String getId() {
