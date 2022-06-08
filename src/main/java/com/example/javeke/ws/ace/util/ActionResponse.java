@@ -4,6 +4,8 @@ public class ActionResponse<T> {
     private boolean isSuccessful;
     private T data;
 
+    public ActionResponse(){}
+
     public ActionResponse(boolean isSuccessful, T data) {
         this.isSuccessful = isSuccessful;
         this.data = data;
