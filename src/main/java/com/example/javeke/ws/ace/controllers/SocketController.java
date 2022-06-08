@@ -6,6 +6,7 @@ import com.example.javeke.ws.ace.models.dto.DeviceData;
 import com.example.javeke.ws.ace.models.dto.DeviceDto;
 import com.example.javeke.ws.ace.services.OrganizationService;
 import com.example.javeke.ws.ace.util.ActionResponse;
+import com.example.javeke.ws.ace.util.ControlType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,15 +50,32 @@ public class SocketController {
         return new SocketDataMessage(deviceData, "message received");
     }
 
-    @MessageMapping("/control/{deviceId}")
-    @SendTo("/device/control/{deviceId}")
-    public SocketControlMessage handleControl(@DestinationVariable("deviceId") String deviceId, @RequestBody SocketControlMessage message){
-        logger.info("Device Id: {} -- Message Received: {}", deviceId, message.getMessage());
-        logger.info("Device Id: {} -- Control Request Received: {}",deviceId, message.getControl());
+    @MessageMapping("/control/organizations/{organizationId}/devices/{deviceId}")
+    @SendTo("/controlData/control/{deviceId}")
+    public SocketControlMessage handleControl(@DestinationVariable("organizationId") String organizationId, @DestinationVariable("deviceId") String deviceId, @RequestBody SocketControlMessage controlMessage){
+        logger.info("Device Id: {} -- Message Received: {}", deviceId, controlMessage.getMessage());
+        logger.info("Device Id: {} -- Control Request Received: {}",deviceId, controlMessage.getControl());
 
-        String control = String.format("Turn off LED 1 on device %s", deviceId);
+        ControlType controlType = ControlType.valueOf(controlMessage.getMessage());
 
-        return new SocketControlMessage(control, "control received");
+        ActionResponse<DeviceDto> response = new ActionResponse<>();
+        SocketControlMessage socketControlMessage = new SocketControlMessage();
+
+        switch (controlType){
+            case StateChange:
+                response = organizationService.toggleDeviceState(organizationId, deviceId, controlMessage.getControl().isEnabled());
+                break;
+            default:
+                break;
+        }
+
+        socketControlMessage.setControl(response.getData());
+
+        if(!response.isSuccessful()){
+            logger.error("Failed to send control signal to device with id {}", deviceId);
+        }
+        socketControlMessage.setMessage(controlType.toString());
+        return socketControlMessage;
     }
 }
 

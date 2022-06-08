@@ -13,7 +13,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry messageBrokerRegistry){
         messageBrokerRegistry.setApplicationDestinationPrefixes("/ace");
-        messageBrokerRegistry.enableSimpleBroker("/deviceData");
+        messageBrokerRegistry.enableSimpleBroker("/deviceData", "/controlData");
     }
 
     @Override

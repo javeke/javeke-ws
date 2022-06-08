@@ -108,6 +108,25 @@ public class OrganizationService {
         return response;
     }
 
+    public ActionResponse<DeviceDto> toggleDeviceState(String organizationId, String deviceId, boolean state){
+        Organization organization = organizationRepository.findByOrganizationId(organizationId);
+
+        ActionResponse<DeviceDto> response = new ActionResponse<>();
+
+        for(DeviceDto device : organization.getDevices()){
+            if(device.getId().equals(deviceId)){
+                device.setEnabled(state);
+                response.setSuccessful(true);
+                response.setData(device);
+                return response;
+            }
+        }
+
+        response.setSuccessful(false);
+        response.setData(null);
+        return response;
+    }
+
     public ActionResponse<DeviceDto> updateData(String organizationId, String deviceId, DeviceData data){
         Organization organization = organizationRepository.findByOrganizationId(organizationId);
 
