@@ -51,7 +51,7 @@ public class SocketController {
     }
 
     @MessageMapping("/control/organizations/{organizationId}/devices/{deviceId}")
-    @SendTo("/controlData/control/{deviceId}")
+    @SendTo("/controlData/organizations/{organizationId}/devices/{deviceId}")
     public SocketControlMessage handleControl(@DestinationVariable("organizationId") String organizationId, @DestinationVariable("deviceId") String deviceId, @RequestBody SocketControlMessage controlMessage){
         logger.info("Device Id: {} -- Message Received: {}", deviceId, controlMessage.getMessage());
         logger.info("Device Id: {} -- Control Request Received: {}",deviceId, controlMessage.getControl());
@@ -74,6 +74,7 @@ public class SocketController {
         if(!response.isSuccessful()){
             logger.error("Failed to send control signal to device with id {}", deviceId);
         }
+        logger.info("Sending control signal to device with id {}", deviceId);
         socketControlMessage.setMessage(controlType.toString());
         return socketControlMessage;
     }
