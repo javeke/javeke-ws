@@ -93,6 +93,7 @@ public class OrganizationController {
         return new ResponseEntity<>(organizationResponse, HttpStatus.OK);
     }
 
+
     @DeleteMapping("/{organizationId}")
     public ResponseEntity<List<OrganizationDto>> deleteOrganization( @PathVariable("organizationId") String organizationId ) throws FailedActionException{
         ActionResponse<List<Organization>> actionResponse = organizationService.removeOrganization(organizationId);
