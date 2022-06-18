@@ -90,6 +90,13 @@ public class OrganizationService {
 
     public ActionResponse<List<DeviceDto>> removeDevice(String organizationId, String deviceId){
         Organization organization = organizationRepository.findByOrganizationId(organizationId);
+        ActionResponse<List<DeviceDto>> response = new ActionResponse<>();
+
+        if(organization.getDevices() == null){
+            response.setSuccessful(false);
+            response.setData(null);
+            return response;
+        }
 
         ActionResponse<List<DeviceDto>> response = new ActionResponse<>();
 
