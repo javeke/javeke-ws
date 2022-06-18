@@ -62,7 +62,6 @@ public class DeviceDto {
     public void setDataPoints(ArrayList<DeviceData> dataPoints) {
         this.dataPoints = dataPoints;
     }
-
     @Override
     public String toString() {
         return "DeviceDto{" +

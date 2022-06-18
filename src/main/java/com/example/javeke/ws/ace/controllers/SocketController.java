@@ -35,7 +35,6 @@ public class SocketController {
         logger.info("Device Id: {} -- Data Received: {} - {}", deviceId, message.getData().getParamName(), message.getData().getParamValue());
         logger.info("Device Id: {} -- Time Received: {}", deviceId, message.getData().getCreatedAt());
 
-
         DeviceData deviceData =  new DeviceData();
         deviceData.setParamName("Temperature");
         deviceData.setParamValue(message.getData().getParamValue());
