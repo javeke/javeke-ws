@@ -115,6 +115,7 @@ public class OrganizationService {
         for(DeviceDto device : organization.getDevices()){
             if(device.getId().equals(deviceId)){
                 device.setEnabled(state);
+                organizationRepository.save(organization);
                 response.setSuccessful(true);
                 response.setData(device);
                 return response;
