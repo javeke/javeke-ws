@@ -2,6 +2,10 @@
 
 This is a web service that will be used for my regularly used services and automated tasks.
 
+This microservice exposes a Date API, a Food API and a Web Socket API for communicating IoT devices.
+This Web Socket API allows for realtime communication with IoT devices by sending 
+control signals to and receiving data signals from the devices.
+
 ## Docker Install
 
 This is project has been dockerized and the package is stored on Docker Hub
