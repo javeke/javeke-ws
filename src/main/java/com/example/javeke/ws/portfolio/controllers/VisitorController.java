@@ -1,7 +1,7 @@
-package com.example.javeke.ws.portfolio.controllers.visitor;
+package com.example.javeke.ws.portfolio.controllers;
 
 import com.example.javeke.ws.portfolio.models.dao.Visitor;
-import com.example.javeke.ws.portfolio.services.visitor.VisitorService;
+import com.example.javeke.ws.portfolio.services.VisitorService;
 import com.example.javeke.ws.portfolio.models.requests.VisitorRequest;
 import com.example.javeke.ws.portfolio.models.dto.VisitorDto;
 import org.springframework.beans.BeanUtils;

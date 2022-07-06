@@ -1,10 +1,10 @@
 package com.example.javeke.portfolio.controllers;
 
 import com.example.javeke.ws.ace.repositories.IOrganizationRepository;
-import com.example.javeke.ws.portfolio.controllers.visitor.VisitorController;
+import com.example.javeke.ws.portfolio.controllers.VisitorController;
 import com.example.javeke.ws.portfolio.models.dao.Visitor;
-import com.example.javeke.ws.portfolio.repositories.visitor.VisitorRepository;
-import com.example.javeke.ws.portfolio.services.visitor.VisitorService;
+import com.example.javeke.ws.portfolio.repositories.VisitorRepository;
+import com.example.javeke.ws.portfolio.services.VisitorService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

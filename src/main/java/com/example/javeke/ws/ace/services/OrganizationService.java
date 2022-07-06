@@ -30,15 +30,15 @@ public class OrganizationService {
 
     public Organization addOrganization(Organization organization){
 
-        String randomId = UUID.randomUUID().toString();
+        Integer organizationId = organizationRepository.findAll().size()+1;
 
-        Organization found = organizationRepository.findByOrganizationId(randomId);
+        Organization found = organizationRepository.findByOrganizationId(organizationId.toString());
 
         while (found != null){
-            randomId = UUID.randomUUID().toString();
-            found = organizationRepository.findByOrganizationId(randomId);
+            organizationId++;
+            found = organizationRepository.findByOrganizationId(organizationId.toString());
         }
-        organization.setOrganizationId(randomId);
+        organization.setOrganizationId(organizationId.toString());
 
         return organizationRepository.save(organization);
     }
@@ -76,12 +76,14 @@ public class OrganizationService {
     public ActionResponse<List<DeviceDto>> addDevice(String organizationId, DeviceDto device){
         Organization organization = organizationRepository.findByOrganizationId(organizationId);
 
-        device.setId(UUID.randomUUID().toString());
-
         if(organization.getDevices() == null){
             ArrayList<DeviceDto> devices = new ArrayList<>();
             organization.setDevices(devices);
         }
+
+        Integer deviceId = organization.getDevices().size()+1;
+
+        device.setId(deviceId.toString());
 
         boolean wasAdded = organization.getDevices().add(device);
         if (wasAdded) organizationRepository.save(organization);

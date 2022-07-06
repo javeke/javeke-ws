@@ -8,7 +8,7 @@ control signals to and receiving data signals from the devices.
 
 ## Docker Install
 
-This is project has been dockerized and the package is stored on Docker Hub
+This is project has been dockerized, and the package is stored on Docker Hub
 with name, javeke-ws. 
 
 Run this command to pull the image <br>

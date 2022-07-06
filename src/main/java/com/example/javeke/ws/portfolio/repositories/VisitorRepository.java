@@ -1,4 +1,4 @@
-package com.example.javeke.ws.portfolio.repositories.visitor;
+package com.example.javeke.ws.portfolio.repositories;
 
 import com.example.javeke.ws.portfolio.models.dao.Visitor;
 import org.springframework.data.mongodb.repository.MongoRepository;
