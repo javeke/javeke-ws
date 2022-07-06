@@ -1,8 +1,8 @@
 package com.example.javeke.portfolio.services;
 
 import com.example.javeke.ws.portfolio.models.dao.Visitor;
-import com.example.javeke.ws.portfolio.repositories.visitor.VisitorRepository;
-import com.example.javeke.ws.portfolio.services.visitor.VisitorService;
+import com.example.javeke.ws.portfolio.repositories.VisitorRepository;
+import com.example.javeke.ws.portfolio.services.VisitorService;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

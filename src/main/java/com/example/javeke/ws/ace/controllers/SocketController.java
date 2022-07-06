@@ -16,6 +16,8 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.time.ZonedDateTime;
+
 @Controller
 public class SocketController {
 
@@ -28,6 +30,13 @@ public class SocketController {
         this.organizationService = organizationService;
     }
 
+    @MessageMapping("/test")
+    @SendTo("/")
+    public String testConnection(String value){
+        logger.info("Testing connection: {}", value);
+        return "Success";
+    }
+
     @MessageMapping("/data/organizations/{organizationId}/devices/{deviceId}")
     @SendTo("/deviceData/organizations/{organizationId}/devices/{deviceId}")
     public SocketDataMessage handleDataRecord(@DestinationVariable("organizationId") String organizationId, @DestinationVariable("deviceId") String deviceId, @RequestBody SocketDataMessage message){
@@ -38,7 +47,7 @@ public class SocketController {
         DeviceData deviceData =  new DeviceData();
         deviceData.setParamName("Temperature");
         deviceData.setParamValue(message.getData().getParamValue());
-        deviceData.setCreatedAt(message.getData().getCreatedAt());
+        deviceData.setCreatedAt(ZonedDateTime.now());
 
         ActionResponse<DeviceDto> actionResponse = organizationService.updateData(organizationId, deviceId, message.getData());
 
@@ -69,7 +78,7 @@ public class SocketController {
         }
 
         socketControlMessage.setControl(response.getData());
-
+        socketControlMessage.getControl().setDataPoints(null);
         if(!response.isSuccessful()){
             logger.error("Failed to send control signal to device with id {}", deviceId);
         }
