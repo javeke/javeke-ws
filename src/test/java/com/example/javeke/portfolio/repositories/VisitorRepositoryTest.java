@@ -1,7 +1,7 @@
 package com.example.javeke.portfolio.repositories;
 
 import com.example.javeke.ws.portfolio.models.dao.Visitor;
-import com.example.javeke.ws.portfolio.repositories.visitor.VisitorRepository;
+import com.example.javeke.ws.portfolio.repositories.VisitorRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
