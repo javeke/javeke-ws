@@ -3,6 +3,7 @@ package com.example.javeke.ws.ace.controllers;
 import com.example.javeke.ws.ace.exceptions.FailedActionException;
 import com.example.javeke.ws.ace.models.dao.Organization;
 import com.example.javeke.ws.ace.models.dto.DeviceDto;
+import com.example.javeke.ws.ace.models.dto.DeviceInfoDto;
 import com.example.javeke.ws.ace.models.dto.OrganizationDto;
 import com.example.javeke.ws.ace.services.OrganizationService;
 import com.example.javeke.ws.ace.util.ActionResponse;
@@ -130,6 +131,18 @@ public class OrganizationController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(device, HttpStatus.OK);
+    }
+
+    @GetMapping("/{organizationId}/devices/{deviceId}/info")
+    public ResponseEntity<DeviceInfoDto> getDeviceInfoById(@PathVariable("organizationId") String organizationId, @PathVariable("deviceId") String deviceId){
+        DeviceDto device = organizationService.getDeviceById(organizationId, deviceId);
+
+        if(device == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        DeviceInfoDto response = new DeviceInfoDto();
+        BeanUtils.copyProperties(device, response);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("/{organizationId}/devices")
