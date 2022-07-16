@@ -1,4 +1,4 @@
-package com.example.javeke.ws.food.models.responses;
+package com.example.javeke.ws.food.models;
 
 public class FoodResponse {
     private String name;
