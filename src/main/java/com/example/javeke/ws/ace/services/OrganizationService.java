@@ -3,8 +3,10 @@ package com.example.javeke.ws.ace.services;
 import com.example.javeke.ws.ace.models.dao.Organization;
 import com.example.javeke.ws.ace.models.dto.DeviceData;
 import com.example.javeke.ws.ace.models.dto.DeviceDto;
+import com.example.javeke.ws.ace.models.dto.DeviceInfoDto;
 import com.example.javeke.ws.ace.repositories.IOrganizationRepository;
 import com.example.javeke.ws.ace.util.ActionResponse;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -109,17 +111,19 @@ public class OrganizationService {
         return response;
     }
 
-    public ActionResponse<DeviceDto> toggleDeviceState(String organizationId, String deviceId, boolean state){
+    public ActionResponse<DeviceInfoDto> toggleDeviceState(String organizationId, String deviceId, boolean state){
         Organization organization = organizationRepository.findByOrganizationId(organizationId);
 
-        ActionResponse<DeviceDto> response = new ActionResponse<>();
+        ActionResponse<DeviceInfoDto> response = new ActionResponse<>();
+        DeviceInfoDto deviceInfoDto = new DeviceInfoDto();
 
         for(DeviceDto device : organization.getDevices()){
             if(device.getId().equals(deviceId)){
                 device.setEnabled(state);
                 organizationRepository.save(organization);
+                BeanUtils.copyProperties(device, deviceInfoDto);
                 response.setSuccessful(true);
-                response.setData(device);
+                response.setData(deviceInfoDto);
                 return response;
             }
         }

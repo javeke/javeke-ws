@@ -1,23 +1,23 @@
 package com.example.javeke.ws.ace.models;
 
-import com.example.javeke.ws.ace.models.dto.DeviceDto;
+import com.example.javeke.ws.ace.models.dto.DeviceInfoDto;
 
 public class SocketControlMessage {
-    private DeviceDto control;
+    private DeviceInfoDto control;
     private String message;
 
     public SocketControlMessage(){}
 
-    public SocketControlMessage(DeviceDto control, String message) {
+    public SocketControlMessage(DeviceInfoDto control, String message) {
         this.control = control;
         this.message = message;
     }
 
-    public DeviceDto getControl() {
+    public DeviceInfoDto getControl() {
         return control;
     }
 
-    public void setControl(DeviceDto control) {
+    public void setControl(DeviceInfoDto control) {
         this.control = control;
     }
 

@@ -4,6 +4,7 @@ import com.example.javeke.ws.ace.models.SocketControlMessage;
 import com.example.javeke.ws.ace.models.SocketDataMessage;
 import com.example.javeke.ws.ace.models.dto.DeviceData;
 import com.example.javeke.ws.ace.models.dto.DeviceDto;
+import com.example.javeke.ws.ace.models.dto.DeviceInfoDto;
 import com.example.javeke.ws.ace.services.OrganizationService;
 import com.example.javeke.ws.ace.util.ActionResponse;
 import com.example.javeke.ws.ace.util.ControlType;
@@ -66,7 +67,7 @@ public class SocketController {
 
         ControlType controlType = ControlType.valueOf(controlMessage.getMessage());
 
-        ActionResponse<DeviceDto> response = new ActionResponse<>();
+        ActionResponse<DeviceInfoDto> response = new ActionResponse<>();
         SocketControlMessage socketControlMessage = new SocketControlMessage();
 
         switch (controlType){
@@ -78,7 +79,7 @@ public class SocketController {
         }
 
         socketControlMessage.setControl(response.getData());
-        socketControlMessage.getControl().setDataPoints(null);
+        socketControlMessage.getControl();
         if(!response.isSuccessful()){
             logger.error("Failed to send control signal to device with id {}", deviceId);
         }

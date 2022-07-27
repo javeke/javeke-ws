@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/organizations")
 public class OrganizationController {
     private final OrganizationService organizationService;
-    private final static Logger logger = LoggerFactory.getLogger(OrganizationController.class);
+    private static final Logger logger = LoggerFactory.getLogger(OrganizationController.class);
 
     @Autowired
     public OrganizationController(OrganizationService organizationService) {
